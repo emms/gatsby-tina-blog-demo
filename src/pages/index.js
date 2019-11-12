@@ -1,21 +1,49 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react'
+import styled from 'styled-components'
+import { graphql } from 'gatsby'
+import { withPlugin } from 'react-tinacms'
+import SEO from 'components/seo'
+import Header from 'components/Header'
+import CreatePostButton from 'tina-plugins/CreatePostButton'
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+const Container = styled.div`
+  display: grid;
+  padding: 50px;
+`
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  const posts = data.allMarkdownRemark.edges
+  return (
+    <Container>
+      <SEO title="Home" />
+      <Header />
+      {posts.map(({ node }) => (
+        <>
+          <h3>{node.frontmatter.title}</h3>
+          <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+        </>
+      ))}
+    </Container>
+  )
+}
 
-export default IndexPage
+export const pageQuery = graphql`
+  query IndexPageQuery {
+    allMarkdownRemark {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date
+            title
+          }
+        }
+      }
+    }
+  }
+`
+
+export default withPlugin(IndexPage, CreatePostButton)
