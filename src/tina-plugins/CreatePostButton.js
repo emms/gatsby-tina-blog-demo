@@ -1,5 +1,4 @@
 import { createRemarkButton } from 'gatsby-tinacms-remark'
-import slugify from 'slugify'
 
 const CreatePostButton = createRemarkButton({
   label: 'Create a new blog post',
@@ -9,12 +8,17 @@ const CreatePostButton = createRemarkButton({
       component: 'text',
       label: 'Title',
       placeholder: 'Lorem Ipsum Dolor Sit Amet',
+      required: true,
     },
   ],
   filename: form => {
-    const slug = slugify(form.title.toLowerCase())
+    const slug = form.title.replace(/\s+/, '-').toLowerCase()
     return `content/blog/${slug}/index.md`
   },
+  frontmatter: form => ({
+    title: form.title,
+    date: new Date(),
+  }),
 })
 
 export default CreatePostButton

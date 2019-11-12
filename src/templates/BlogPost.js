@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { remarkForm } from 'gatsby-tinacms-remark'
 
 const BlogPostTemplate = ({ data }) => {
@@ -8,21 +8,36 @@ const BlogPostTemplate = ({ data }) => {
   return (
     <div>
       <div>
+        <Link to="/">Back</Link>
         <h1>{frontmatter.title}</h1>
-        <h2>{frontmatter.date}</h2>
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </div>
   )
 }
 
+const BlogPostForm = {
+  fields: [
+    {
+      label: 'Title',
+      name: 'rawFrontmatter.title',
+      component: 'text',
+    },
+    {
+      label: 'Content',
+      name: 'rawMarkdownBody',
+      component: 'markdown',
+      description: 'Edit the body of the post here',
+    },
+  ],
+}
+
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query BlogPostBySlug($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
       }
       fileRelativePath
@@ -32,4 +47,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default remarkForm(BlogPostTemplate)
+export default remarkForm(BlogPostTemplate, BlogPostForm)

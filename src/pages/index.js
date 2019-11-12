@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { withPlugin } from 'react-tinacms'
 import SEO from 'components/seo'
 import Header from 'components/Header'
@@ -11,18 +11,37 @@ const Container = styled.div`
   padding: 50px;
 `
 
+const Posts = styled.div`
+  padding: 50px 0;
+`
+
+const Post = styled.div`
+  padding-bottom: 20px;
+`
+
+const PostLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`
+
 const IndexPage = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
   return (
     <Container>
       <SEO title="Home" />
       <Header />
-      {posts.map(({ node }) => (
-        <>
-          <h3>{node.frontmatter.title}</h3>
-          <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-        </>
-      ))}
+      <Posts>
+        {posts.map(({ node }) => (
+          <Post key={node.id}>
+            <h3>
+              <PostLink to={node.fields.slug}>
+                {node.frontmatter.title || node.fields.slug}
+              </PostLink>
+            </h3>
+            <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          </Post>
+        ))}
+      </Posts>
     </Container>
   )
 }
@@ -32,12 +51,12 @@ export const pageQuery = graphql`
     allMarkdownRemark {
       edges {
         node {
+          id
           excerpt
           fields {
             slug
           }
           frontmatter {
-            date
             title
           }
         }
