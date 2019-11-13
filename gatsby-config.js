@@ -40,6 +40,9 @@ module.exports = {
       resolve: 'gatsby-plugin-tinacms',
       options: {
         plugins: ['gatsby-tinacms-git', 'gatsby-tinacms-remark'],
+        sidebar: {
+          position: 'displace',
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
