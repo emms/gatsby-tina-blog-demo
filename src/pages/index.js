@@ -38,6 +38,7 @@ const IndexPage = ({ data }) => {
                 {node.frontmatter.title || node.fields.slug}
               </PostLink>
             </h3>
+            <p>{node.frontmatter.date}</p>
             <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
           </Post>
         ))}
@@ -48,7 +49,7 @@ const IndexPage = ({ data }) => {
 
 export const pageQuery = graphql`
   query IndexPageQuery {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
       edges {
         node {
           id
@@ -58,6 +59,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            date(formatString: "MMMM DD, YYYY HH:mm")
           }
         }
       }

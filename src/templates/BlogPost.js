@@ -1,18 +1,23 @@
 import React from 'react'
+import styled from 'styled-components'
 import { graphql, Link } from 'gatsby'
 import { remarkForm } from 'gatsby-tinacms-remark'
+import Header from 'components/Header'
+
+const StyledBlogPostTempalte = styled.div`
+  padding: 50px;
+`
 
 const BlogPostTemplate = ({ data }) => {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
   return (
-    <div>
-      <div>
-        <Link to="/">Back</Link>
-        <h1>{frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </div>
-    </div>
+    <StyledBlogPostTempalte>
+      <Header />
+      <Link to="/">Back</Link>
+      <h1>{frontmatter.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </StyledBlogPostTempalte>
   )
 }
 
