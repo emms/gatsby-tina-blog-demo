@@ -9,6 +9,21 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          'gatsby-remark-relative-images',
+          'gatsby-remark-normalize-paths',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog`,
@@ -20,22 +35,6 @@ module.exports = {
       options: {
         name: `assets`,
         path: `${__dirname}/content/assets`,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          'gatsby-remark-relative-images',
-          'gatsby-remark-normalize-paths',
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1500,
-              linkImagesToOriginal: false,
-            },
-          },
-        ],
       },
     },
     {
