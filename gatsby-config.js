@@ -37,6 +37,7 @@ module.exports = {
         path: `${__dirname}/content/assets`,
       },
     },
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
