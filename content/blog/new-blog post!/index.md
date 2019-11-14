@@ -1,6 +1,7 @@
 ---
 title: New Blog Post!
 date: 2019-11-14T12:36:49.130Z
+hero_image: ../../assets/bobby-stevenson-449770-unsplash.jpg
 ---
 Wow! I love _**blogging**_ so much already.
 
