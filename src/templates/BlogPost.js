@@ -16,7 +16,9 @@ const BlogPostTemplate = ({ data }) => {
     <StyledBlogPostTempalte>
       <Header />
       <Link to="/">Back</Link>
-      <Img fluid={frontmatter.hero_image.childImageSharp.fluid} />
+      {frontmatter.hero_image && (
+        <Img fluid={frontmatter.hero_image.childImageSharp.fluid} />
+      )}
       <h1>{frontmatter.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </StyledBlogPostTempalte>

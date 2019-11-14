@@ -1,7 +1,7 @@
 ---
 title: First blog post
 date: 2019-11-12T11:21:06.075Z
-hero_image: /content/assets/test.jpg
+hero_image: ../../assets/tyler-nix-q-motCAvPBM-unsplash.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cur post Tarentum ad Archytam? Restatis igitur vos; Quid sequatur, quid repugnet, vident. Ex quo, id quod omnes expetunt, beate vivendi ratio inveniri et comparari potest. Quae cum dixisset, finem ille.
