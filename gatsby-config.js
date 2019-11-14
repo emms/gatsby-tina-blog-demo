@@ -63,7 +63,7 @@ module.exports = {
       options: {
         plugins: ['gatsby-tinacms-git', 'gatsby-tinacms-remark'],
         sidebar: {
-          hidden: process.env.HIDE_SIDEBAR === 'true',
+          hidden: process.env.SHOW_SIDEBAR !== 'true',
           position: 'displace',
         },
       },
