@@ -1,3 +1,5 @@
+require(`dotenv`).config({ path: `.env` })
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby + Tina blog demo`,
@@ -61,7 +63,7 @@ module.exports = {
       options: {
         plugins: ['gatsby-tinacms-git', 'gatsby-tinacms-remark'],
         sidebar: {
-          hidden: process.env.NODE_ENV === 'production',
+          hidden: process.env.HIDE_SIDEBAR === 'true',
           position: 'displace',
         },
       },
